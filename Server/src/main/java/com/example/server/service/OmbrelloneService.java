@@ -5,6 +5,8 @@ import com.example.server.repository.OmbrelloneRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OmbrelloneService {
 
@@ -13,5 +15,9 @@ public class OmbrelloneService {
 
     public Ombrellone saveOmbrellone(Ombrellone ombrellone){
         return  ombrelloneRepo.save(ombrellone);
+    }
+
+    public List<Ombrellone> getAllOmbrelloni() {
+        return ombrelloneRepo.findAll();
     }
 }

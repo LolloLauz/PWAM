@@ -19,7 +19,7 @@ public class Cliente {
     @JoinColumn(name = "id_cliente",referencedColumnName = "id")
     private Set<Prenotazione> prenotazioni=new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "id_cliente",referencedColumnName = "id")
     private Set<Ordinazione> ordinazioni=new HashSet<>();
 

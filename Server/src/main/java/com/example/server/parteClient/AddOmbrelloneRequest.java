@@ -1,4 +1,4 @@
-package com.example.server.controller;
+package com.example.server.parteClient;
 
 public class AddOmbrelloneRequest {
 
@@ -26,6 +26,4 @@ public class AddOmbrelloneRequest {
         this.idPrenotazione = idPrenotazione;
     }
 
-    public AddOmbrelloneRequest() {
-    }
 }

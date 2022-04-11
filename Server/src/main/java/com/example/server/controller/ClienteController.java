@@ -46,12 +46,6 @@ public class ClienteController {
         return new Response(request.getEmail(),access_token);
     }
 
-    @PostMapping("/addPrenotaizone")
-    public Prenotazione addPrenotazioneToCliente(@RequestBody Prenotazione prenotazione, HttpServletRequest request){
-        String email=getEmailFromToken(request.getHeader(AUTHORIZATION));
-        return clienteService.addPrenotazioneToClient(prenotazione,email);
-    }
-
     @GetMapping("/getAllClienti")
     public List<Cliente> getAllClienti(){
         return clienteService.getAllClienti();

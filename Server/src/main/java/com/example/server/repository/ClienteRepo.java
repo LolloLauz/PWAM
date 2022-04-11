@@ -1,6 +1,7 @@
 package com.example.server.repository;
 
 import com.example.server.model.Cliente;
+import com.example.server.model.Ordinazione;
 import com.example.server.model.Prenotazione;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,4 +15,7 @@ public interface ClienteRepo extends JpaRepository<Cliente,Long> {
     Cliente findClienteById(Long id);
     @Query("SELECT c.prenotazioni FROM Cliente c WHERE c.email=?1")
     List<Prenotazione> getPrenotazioniCliente(String email);
+
+    @Query("SELECT c.ordinazioni FROM Cliente c WHERE c.email=?1")
+    List<Ordinazione> getOrdinazioniCliente(String email);
 }

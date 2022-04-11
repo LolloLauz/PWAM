@@ -13,11 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.http.HttpRequest;
 import java.util.Date;
 import java.util.List;
 
@@ -35,15 +33,15 @@ public class ClienteController {
 
     @PostMapping("/login")
     public Response logIn(@RequestBody Request request){
-        UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword());
+        UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(request.getUsername(),request.getPassword());
         authenticationManager.authenticate(authenticationToken);
         Algorithm algorithm=Algorithm.HMAC256("secret".getBytes());
-        UserDetails user=clienteService.loadUserByUsername(request.getEmail());
+        UserDetails user=clienteService.loadUserByUsername(request.getUsername());
         String access_token= JWT.create()
                 .withSubject(user.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis()+10*60*1000))
                 .sign(algorithm);
-        return new Response(request.getEmail(),access_token);
+        return new Response(request.getUsername(),access_token);
     }
 
     @GetMapping("/getAllClienti")

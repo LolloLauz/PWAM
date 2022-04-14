@@ -116,7 +116,8 @@ public class OrdinazioneService {
     }
 
     public List<DettaglioOrdResponse> getDetails(Long idOrdinazione, String email) {
-        if(clienteRepo.findClienteByEmail(email).getPrenotazioni().contains(ordinazioneRepo.getById(idOrdinazione))) {
+        if(clienteRepo.findClienteByEmail(email).getOrdinazioni().contains(ordinazioneRepo.getById(idOrdinazione))) {
+            System.out.println("il constrollo nell'if va a buon fine");
             List<DettaglioOrdResponse> dettaglioOrdinazioneResponse = new ArrayList<>();
             System.out.println(dettagliOrdiRepo.getDettagliOrdByIdOrdinazione(idOrdinazione).size());
             for (DettagliOrd dettagliOrd : dettagliOrdiRepo.getDettagliOrdByIdOrdinazione(idOrdinazione)) {

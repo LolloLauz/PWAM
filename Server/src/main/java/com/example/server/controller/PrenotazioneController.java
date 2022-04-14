@@ -7,6 +7,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.server.model.Ombrellone;
 import com.example.server.model.Prenotazione;
 import com.example.server.parteClient.AddOmbrelloneRequest;
+import com.example.server.parteClient.OmbrelloniLiberiRequest;
 import com.example.server.service.PrenotazioneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,16 +41,16 @@ public class PrenotazioneController {
     }
 
     @PostMapping("/addPrenotazione")
-    public Prenotazione addPrneotazione(@RequestBody Prenotazione prenotazione, HttpServletRequest request){
+    public Long addPrneotazione(@RequestBody Prenotazione prenotazione, HttpServletRequest request){
         String email=getEmailFromToken(request.getHeader(AUTHORIZATION));
-        return prenotazioneService.addNewPrenotazione(prenotazione,email);
+        return prenotazioneService.addNewPrenotazione(prenotazione,email).getId();
     }
 
-    @GetMapping("/getOmbrelloniLiberi/{inizio}/{fine}")
-    public List<Ombrellone> getOmbrelloniLiberi(@PathVariable String inizio, @PathVariable String fine){
+    @GetMapping("/getOmbrelloniLiberi/{dataIni}/{dataFin}")
+    public List<Ombrellone> getOmbrelloniLiberi(@PathVariable String dataIni,@PathVariable String dataFin){
         DateTimeFormatter dtf=DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate dataInizio=LocalDate.parse(inizio,dtf);
-        LocalDate dataFine=LocalDate.parse(fine,dtf);
+        LocalDate dataInizio=LocalDate.parse(dataIni,dtf);
+        LocalDate dataFine=LocalDate.parse(dataFin,dtf);
         return prenotazioneService.getOmbrelloniLiberiInUnPeriodo(dataInizio,dataFine);
     }
 

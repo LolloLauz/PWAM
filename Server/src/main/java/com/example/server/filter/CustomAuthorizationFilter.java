@@ -40,6 +40,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                     String username=decodedJWT.getSubject();
                     UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(username,null,new ArrayList<>());
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                    System.out.println("richiesta controllata");
                     filterChain.doFilter(request,response);
                 }catch (Exception e){
                     log.error("Errore log in {}",e.getMessage());

@@ -8,6 +8,7 @@ import com.example.server.model.Cliente;
 import com.example.server.model.Prenotazione;
 import com.example.server.repository.ClienteRepo;
 import com.example.server.repository.PrenotazioneRepo;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -19,10 +20,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 @Slf4j
 @Service
+
 public class ClienteService implements UserDetailsService {
 
     @Autowired
@@ -46,14 +47,19 @@ public class ClienteService implements UserDetailsService {
         }else{
             log.info("Cliente trovato");
         }
-
         return new User(cliente.getEmail(),cliente.getPassword(),new ArrayList<>());
     }
 
-    public Cliente saveUser(Cliente cliente){
-        log.info("saving user {} to the database",cliente.getNome());
+    public boolean saveUser(Cliente cliente){
         cliente.setPassword(passwordEncoder.encode(cliente.getPassword()));
-        return clienteRepo.save(cliente);
+        if(clienteRepo.findClienteByEmail(cliente.getEmail())==null){
+            log.info("saving user {} to the database",cliente.getNome());
+            clienteRepo.save(cliente);
+            return true;
+        }else{
+            log.error("L'email appartiene già ad un altro cliente");
+            return false;
+        }
     }
 
     public Cliente getCliente(String email){

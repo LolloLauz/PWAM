@@ -31,14 +31,17 @@ public class ClienteController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+
     @PostMapping("/login")
     public Response logIn(@RequestBody Request request){
-        UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(request.getUsername(),request.getPassword());
-        authenticationManager.authenticate(authenticationToken);
+        UserDetails userDetails=clienteService.loadUserByUsername(request.getUsername());
+//        UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(request.getUsername(),request.getPassword());
+//        authenticationManager.authenticate(authenticationToken);
         Algorithm algorithm=Algorithm.HMAC256("secret".getBytes());
-        UserDetails user=clienteService.loadUserByUsername(request.getUsername());
+//        UserDetails user=clienteService.loadUserByUsername(request.getUsername());
+
         String access_token= JWT.create()
-                .withSubject(user.getUsername())
+                .withSubject(userDetails.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis()+10*60*1000))
                 .sign(algorithm);
         return new Response(request.getUsername(),access_token);
@@ -61,5 +64,10 @@ public class ClienteController {
         JWTVerifier verifier = JWT.require(algorithm).build();
         DecodedJWT decodedJWT = verifier.verify(token);
         return decodedJWT.getSubject();
+    }
+
+    @PostMapping("/register")
+    public boolean registrazioneCliente(@RequestBody Cliente cliente){
+        return clienteService.saveUser(cliente);
     }
 }

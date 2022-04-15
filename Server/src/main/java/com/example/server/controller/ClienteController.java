@@ -6,6 +6,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.server.model.Cliente;
 import com.example.server.model.Prenotazione;
+import com.example.server.parteClient.AddOmbrelloneRequest;
+import com.example.server.parteClient.AddUserRequest;
 import com.example.server.parteClient.Request;
 import com.example.server.parteClient.Response;
 import com.example.server.service.ClienteService;
@@ -45,6 +47,12 @@ public class ClienteController {
                 .withExpiresAt(new Date(System.currentTimeMillis()+10*60*1000))
                 .sign(algorithm);
         return new Response(request.getUsername(),access_token);
+    }
+
+    @PostMapping("/register")
+    public void register(@RequestBody AddUserRequest userRequest){
+        Cliente cliente = new Cliente(userRequest.getEmail(),userRequest.getPassword(),userRequest.getNome(),userRequest.getCognome());
+        clienteService.saveUser(cliente);
     }
 
     @GetMapping("/getAllClienti")

@@ -1,0 +1,30 @@
+<h3>Crea Ordinazione</h3>
+<form (ngSubmit) ="onSubmit()">
+    <div class="form-group">
+        <label>QrCode</label>
+        <select [(ngModel)]="codice" name="codice">
+            <option *ngFor="let qrCode of codiciqrCode" value="{{qrCode}}">{{qrCode}}</option>
+          </select>
+    </div>
+    <button class="btn btn-success" type="submit">submit</button>
+</form>
+<h2>Elenco Prodotti Disponibili</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th> Nome Prodotto </th>
+            <th> Prezzo </th>
+            <th>Ordina</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let  prodotto of prodotti">
+            <td> {{prodotto.nome}}</td>
+            <td>{{prodotto.prezzo}}</td>
+            <td>
+            <button  class="btn btn-info" (click)="ordinaProdotto(prodotto.id)">Ordina</button>
+            </td>
+            <td>{{getQuantita(prodotto.id)}}</td>
+        </tr>
+    </tbody>
+</table>

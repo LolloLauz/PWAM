@@ -1,0 +1,42 @@
+<h2>Lista prenotazioni Utente</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th> Data Inizio</th>
+            <th> Data Fine</th>
+            <th> Numero Sdraio</th>
+            <th>Stato</th>
+            <th>Elenco Ombrelloni</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let prenotazione of prenotazioni">
+            <td> {{prenotazione.dataInizio}}</td>
+            <td> {{prenotazione.dataFine}}</td>
+            <td> {{prenotazione.num_sdraio}}</td>
+            <td> {{prenotazione.stato}}</td>
+            <td>
+                <button class="btn btn-info" (click)="listaOmbrelloni(prenotazione.id)">Dettagli</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div *ngIf="checkFlag()" class="container">
+    <h2>Dettagli Prenotazione</h2>
+    <div class="row justify-content-center">
+        <table class="table table-striped text-center">
+            <thead>
+                <tr>
+                    <th> id</th>
+                    <th> QrCode</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ombrellone of ombrelloni">
+                    <td> {{ombrellone.id}}</td>
+                    <td> {{ombrellone.qrCode}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

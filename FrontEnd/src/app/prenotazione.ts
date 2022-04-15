@@ -1,4 +1,7 @@
 export class Prenotazione {
-    "id":string;
-    "descrizione":string;
+    "id":number;
+    "num_sdraio":number;
+    "dataInizio":Date
+    "dataFine":Date;
+    "stato":string;
 }

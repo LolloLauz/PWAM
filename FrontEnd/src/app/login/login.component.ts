@@ -1,10 +1,8 @@
-import { temporaryAllocator } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { ClienteServiceService } from '../cliente-service.service';
 import { Requestlogin } from '../requestlogin';
-import { RestapiService } from '../restapi.service';
-import { UserAuthService } from '../user-auth.service';
+import {RequestRegister} from "../request-register";
 
 @Component({
   selector: 'app-login',
@@ -13,31 +11,30 @@ import { UserAuthService } from '../user-auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  // Login
   username: string;
   password: string;
   richistaAutenticazione: Requestlogin = new Requestlogin;
   toke: string;
 
-  constructor(private service: RestapiService, private route: Router, private userAuthService: UserAuthService) { }
+  // Registrazione
+ 
+
+  constructor(private clienteService:ClienteServiceService,private route:Router) { }
 
   ngOnInit(): void {
   }
 
-
   doLogin() {
     this.richistaAutenticazione.username = this.username;
     this.richistaAutenticazione.password = this.password;
-    this.service.login(this.richistaAutenticazione).subscribe(
+    this.clienteService.login(this.richistaAutenticazione).subscribe(
       (data) => {
         localStorage.setItem("user",data.email);
         localStorage.setItem("token",data.token);
         const temp=localStorage.getItem("token")!;
         const tokeninfo = atob(temp.split('.')[1]);
-        if (tokeninfo.match("ROLE_ADMIN")) {
-          this.route.navigate(['/admin']);
-        }else{
-          this.route.navigate(['/user'])
-        }
+          this.route.navigate(['/home']);
       },
       (error) => {
         console.log(error);

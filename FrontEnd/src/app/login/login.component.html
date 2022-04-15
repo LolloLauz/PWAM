@@ -4,7 +4,7 @@
 <div class="container mt-5">
     <div class="card" style="padding: 20px">
         <form action="login" method="post">
-            <h1>Lollo</h1>
+            <h4>Login</h4>
             <div class="inset">
                 <p>
                     <input type="text" name="username" [(ngModel)]="username" id="email" placeholder="username">
@@ -13,9 +13,14 @@
                     <input type="password" name="password" [(ngModel)]="password" id="password" placeholder="password">
                 </p>
             </div>
+            <p>
+              non sei inscritto
+              <a class="nav-link active" aria-current="page" routerLink="/registrazione">Registrati</a>
+            </p>
             <p class="p-container">
                 <input type="submit" name="Login" id="go" value="Login" (click)="doLogin()">
             </p>
         </form>
     </div>
 </div>
+

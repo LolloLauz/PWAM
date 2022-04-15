@@ -1,0 +1,25 @@
+<div class="container mt-5">
+    <div class="card" style="padding: 20px">
+      <form action="register" method="post">
+        <h4>Registrati</h4>
+        <div class="inset">
+          <p>
+            <input type="text" name="username" [(ngModel)]="nome" id="nome" placeholder="nome">
+          </p>
+          <p>
+            <input type="text" name="password" [(ngModel)]="cognome" id="cognome" placeholder="cognome">
+          </p>
+          <p>
+            <input type="text" name="password" [(ngModel)]="email" id="emailRegistrati" placeholder="email">
+          </p>
+          <p>
+            <input type="password" name="password" [(ngModel)]="psw" id="psw" placeholder="password">
+          </p>
+        </div>
+        <p class="p-container">
+          <input type="submit" name="Login" id="register" value="Registrati" (click)="doRegister()">
+        </p>
+      </form>
+    </div>
+  </div>
+  

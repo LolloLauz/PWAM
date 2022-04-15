@@ -49,12 +49,6 @@ public class ClienteController {
         return new Response(request.getUsername(),access_token);
     }
 
-    @PostMapping("/register")
-    public void register(@RequestBody AddUserRequest userRequest){
-        Cliente cliente = new Cliente(userRequest.getEmail(),userRequest.getPassword(),userRequest.getNome(),userRequest.getCognome());
-        clienteService.saveUser(cliente);
-    }
-
     @GetMapping("/getAllClienti")
     public List<Cliente> getAllClienti(){
         return clienteService.getAllClienti();

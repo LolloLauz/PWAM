@@ -1,0 +1,50 @@
+<h2>Lista Ordinazione</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th> Id</th>
+            <th> QrCode</th>
+            <th> Stato</th>
+            <th> Stato Consegna</th>
+            <th> Dettagli</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let ordinazione of ordinazioni">
+            <td> {{ordinazione.id}}</td>
+            <td> {{ordinazione.qrCode}}</td>
+            <td> {{ordinazione.stato}}</td>
+            <td> {{ordinazione.statoConsegna}}</td>
+            <td>
+                <button class="btn btn-info" (click)="ordinazioneDetail(ordinazione.id)">Dettagli</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div *ngIf="checkflag()" class="container">
+    <h2>Dettaglio Ordinazione</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th> Nome Prodotto </th>
+                <th> Quantita </th>
+                <th> Prezzo </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ordinazione of ordinazioniDetails">
+                <td> {{ordinazione.prodotto.nome}}</td>
+                <td> {{ordinazione.quantita}}</td>
+                <td> {{ordinazione.prodotto.prezzo*ordinazione.quantita}}&euro;</td>
+              {{addTotale(ordinazione.prodotto.prezzo*ordinazione.quantita)}}
+            </tr>
+            <tr class="totale">
+              <td><b>Totale:</b></td>
+              <td> </td>
+              <td><b> {{"" + returnTotale()}}&euro; </b></td>
+              {{setTotale(0)}}
+            </tr>
+        </tbody>
+    </table>
+</div>

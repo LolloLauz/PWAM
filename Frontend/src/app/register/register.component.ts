@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
       this.richistaRegistrazione.password = this.psw;
       this.clienteService.register(this.richistaRegistrazione).subscribe(
         (data) => {
-          console.log(data);
+          
           if(data){
           alert("Registrato!");
           this.router.navigate(["/login"]);

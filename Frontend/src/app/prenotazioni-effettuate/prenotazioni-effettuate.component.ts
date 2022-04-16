@@ -26,7 +26,7 @@ export class PrenotazioniEffettuateComponent implements OnInit {
 
   listaOmbrelloni(idPrenotazione:number){
     this.clientService.getOmbrelloniPrenotazione(idPrenotazione).subscribe(data=>{
-      console.log(data);
+      
       this.ombrelloni=data;
     });
     if(this.ombrelloni!=null){

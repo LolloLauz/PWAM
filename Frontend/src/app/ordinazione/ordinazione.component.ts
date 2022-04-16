@@ -30,10 +30,10 @@ export class OrdinazioneComponent implements OnInit {
   ngOnInit(): void {
     this.prodottoService.getAllProdotti().subscribe(data=>{
       this.prodotti=data;
-      console.log(data);
+      
     })
     this.ombrelloneService.getOmbrelloni().subscribe(data=>{
-      console.log(data);
+      
       data.forEach(element => {
         this.codiciqrCode.push(element.qrCode);
       });

@@ -34,7 +34,7 @@ export class OrdinazioniEffettuateComponent implements OnInit {
   ordinazioneDetail(idOrdinazione:number){
     this.ordinazioneService.getDettaglioOrdinazione(idOrdinazione).subscribe(data=>{
       this.ordinazioniDetails=data;
-      console.log(data);
+      
     });
     if(this.ordinazioniDetails!=null){
         this.flag=true;

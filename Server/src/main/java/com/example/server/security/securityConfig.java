@@ -1,6 +1,6 @@
 package com.example.server.security;
 
-import com.example.server.filter.CustomAuthorizationFilter;
+bambozzi fa piu serate che cene
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
